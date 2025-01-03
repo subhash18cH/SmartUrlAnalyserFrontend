@@ -20,7 +20,11 @@ const Sidebar = () => {
   ]
   return (
     <>
-      <div className='m-2 w-52  h-screen'>
+      <div className='m-2 w-52 h-screen mt-[80px] fixed'>
+
+        <div className='flex'>
+          <span>SmartUrl</span>
+        </div>
         <div className='flex flex-col space-y-6'>
           {sidebarMenu.map((item) => (
             <button onClick={()=>{

@@ -1,25 +1,28 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Contact from "./components/Contact";
-import Home from "./components/Home";
-import About from "./components/About";
 import SignUp from "./components/Auth/SignUp";
 import QrCode from "./components/QrCode";
 import LinkPage from "./components/LinkPage";
 import Analytics from "./components/Analytics";
+import SignIn from "./components/Auth/SignIn";
+import Home from "./components/Home";
+import Create from "./components/Create";
+import { Toaster } from "react-hot-toast";
 
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
+
       <Routes>
 
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/create" element={<Create />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/qr-code" element={<QrCode />} />
         <Route path="/link-page" element={<LinkPage />} />
         <Route path="/analytics" element={<Analytics />} />
