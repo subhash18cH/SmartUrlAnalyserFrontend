@@ -1,8 +1,13 @@
 import React from 'react'
-
+import Sidebar from './Sidebar';
 const Analytics = () => {
   return (
-    <div>Analytics</div>
+    <>
+      <Sidebar />
+      <div className='flex justify-center'>
+        fhfh
+      </div>
+    </>
   )
 }
 

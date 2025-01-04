@@ -6,34 +6,25 @@ import { IoAnalytics } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { IoMdCreate } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-
+import ButtonSide from './ButtonSide';
+import logo from '/src/assets/SmartUrlLogo.jpg'
 const Sidebar = () => {
-
-  const navigate=useNavigate();
-
-  const sidebarMenu = [
-    { title: "Create", path: "/create", icon: <IoMdCreate /> },
-    { title: "Link", path: "/link-page", icon: <FiLink /> },
-    { title: "Qr Code", path: "/qr-code",icon: <QrCode /> },
-    { title: "Analytics", path: "/analytics",icon: <IoAnalytics />},
-    { title: "Logout", path: "/logout",icon: <IoMdLogOut />},
-  ]
   return (
     <>
-      <div className='m-2 w-52 h-screen mt-[80px] fixed'>
+      <div className=' w-52 h-screen  fixed flex flex-col justify-between py-4'>
+        <div className='flex flex-col justify-between'>
+          <div className='flex justify-center items-center'>
+            <div className=''><img className='rounded-full w-24' src={logo} alt="SmartUrl" /></div>
+            <span className='text-xl font-semibold'>SmartUrl</span>
 
-        <div className='flex'>
-          <span>SmartUrl</span>
-        </div>
-        <div className='flex flex-col space-y-6'>
-          {sidebarMenu.map((item) => (
-            <button onClick={()=>{
-              navigate(item.path)
-            }} className=' px-2 py-2 rounded-md hover:bg-slate-200 flex items-center space-x-5' to={item.path} key={item.title}>
-              <span className='text-2xl'>{item.icon}</span>
-              <p className=''>{item.title}</p>
-            </button>
-          ))}
+          </div>
+          <div className='flex flex-col space-y-6 justify-center items-center mt-6'>
+            <ButtonSide label="Create" route="/create" icon={<IoMdCreate />} />
+            <ButtonSide label="Links" route="/link-page" icon={<FiLink />} />
+            <ButtonSide label="Qr Code" route="/qr-code" icon={<QrCode />} />
+            <ButtonSide label="Analytics" route="/analytics" icon={<IoAnalytics />} />
+            <ButtonSide label="Logout" route="/logout" icon={<IoMdLogOut />} />
+          </div>
         </div>
       </div>
     </>
