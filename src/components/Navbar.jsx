@@ -1,32 +1,25 @@
 import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Menu, X } from 'lucide-react';
+import logo from '/src/assets/SmartUrlLogo.jpg'
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/signup")
-  }
 
-  const menuItems = [
-    {
-      title: "Home", path: "/"
-    }
-  ]
 
   return (
     <>
       <nav className='bg-white shadow-lg fixed w-full  '>
         <div className='flex justify-between items-center p-4'>
-          <div>
-            <h1 className='font-bold text-2xl text-red-700'>SmartUrl</h1>
+
+          <div className='flex justify-center items-center'>
+            <img className='rounded-full w-24' src={logo} alt="Logo" />
+            <h1 className='font-semibold text-2xl'>SmartUrl</h1>
           </div>
 
           <div className='space-x-8'>
-            {menuItems.map((item) => (
-              <NavLink to={item.path} key={item.title}>{item.title}</NavLink>
-            ))}
-            <button onClick={handleClick} className='text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md'>Sign Up</button>
+
+            <NavLink to={"/signin"} className='py-2 px-4 font-semibold rounded-lg text-gray-800 hover:text-black'>Log In</NavLink>
+            <NavLink to={"/signup"} className=' outline-none py-3 px-4 border bg-blue-700 text-white hover:bg-blue-600 font-semibold rounded-md'>Sign Up</NavLink>
           </div>
         </div>
       </nav>

@@ -15,7 +15,7 @@ const Create = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await api.post('/shortUrl', null, {
+      const response = await api.post('url/shortUrl', null, {
         params: {
           LongUrl: longURL,
         },
@@ -55,7 +55,7 @@ const Create = () => {
                   Enter your URL <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="px-4 py-3 border rounded-lg w-[80%] outline-none transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  className="px-4 py-3 border rounded-lg w-[70%] outline-none transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   type="url"
                   required
                   placeholder="Enter your long URL here"
@@ -69,7 +69,7 @@ const Create = () => {
                 <label className="block mb-3 font-semibold text-gray-700">
                   Your short URL
                 </label>
-                <div className="relative w-[50%]">
+                <div className="relative w-[70%]">
                   <input
                     className="px-4 py-3 pr-10 border border-gray-300 rounded-lg w-full outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
                     type="text"
@@ -89,20 +89,16 @@ const Create = () => {
                   )}
                 </div>
               </div>
-
-
-
-              <div className="flex justify-center items-center mt-8">
+              <div className=" mt-12">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`relative px-12 py-3 rounded-lg font-semibold ${isLoading ? 'bg-blue-400 cursor-wait' : 'bg-blue-600 hover:bg-blue-500'
+                  className={`relative px-12 py-3 rounded-lg font-semibold w-[70%] ${isLoading ? 'bg-blue-400 cursor-wait' : 'bg-blue-600 hover:bg-blue-500'
                     } text-white`}
                 >
                   {isLoading ? 'Generating...' : 'Generate'}
                 </button>
               </div>
-
 
             </form>
           </div>

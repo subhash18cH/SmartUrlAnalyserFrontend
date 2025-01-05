@@ -1,46 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import api from '../Api';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
+
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      userName: "",
+      password: "",
+    },
+    mode: "onTouched",
+  });
+
+  const onLoginHandler = async (data) => {
+    try {
+      setLoading(true);
+      const response = await api.post("/auth/public/signin", data);
+      if (response.status === 200 && response.data.jwtToken) {
+        reset();
+        toast.success("Login Successful");
+        localStorage.setItem("JWT", response.data.jwtToken)
+        navigate("/create")
+
+      }
+      else {
+        toast.error("something went wrong!")
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
-        {/* Header */}
+
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">
             Welcome back
           </h2>
           <p className="mt-2 text-gray-600">
-            Sign in to your account
+            Please Enter your username and password
           </p>
         </div>
 
-        {/* Form */}
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onLoginHandler)}>
           <div className="space-y-4">
-            {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
+              <label htmlFor="userName" className="block text-sm font-semibold  text-gray-700">
+                UserName
               </label>
               <input
-                id="email"
-                name="email"
-                type="email"
+                id="userName"
+                name="userName"
+                type="text"
+                {...register("userName")}
+                errors={errors}
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="john@example.com"
+                placeholder="john doe"
               />
             </div>
 
-            {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-semibold text-gray-700">
                 Password
               </label>
               <input
@@ -48,35 +83,15 @@ const SignIn = () => {
                 name="password"
                 type="password"
                 required
+                {...register("password")}
+                errors={errors}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="••••••••"
+                placeholder="********"
               />
             </div>
           </div>
 
-          {/* Remember Me and Forgot Password */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
-          {/* Submit Button */}
           <div>
             <button
               type="submit"
@@ -84,11 +99,22 @@ const SignIn = () => {
               shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 
               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Sign in
+              {loading ? <span>Loading...</span> : "Log In"}
             </button>
           </div>
 
-         
+
+          <p className="text-center text-sm text-slate-700 mt-6">
+            Don't have an account?{" "}
+            <Link
+              className="font-semibold underline hover:text-black"
+              to="/signup"
+            >
+              SignUp
+            </Link>
+          </p>
+
+
         </form>
       </div>
     </div>

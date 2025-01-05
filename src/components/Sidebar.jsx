@@ -23,7 +23,12 @@ const Sidebar = () => {
             <ButtonSide label="Links" route="/link-page" icon={<FiLink />} />
             <ButtonSide label="Qr Code" route="/qr-code" icon={<QrCode />} />
             <ButtonSide label="Analytics" route="/analytics" icon={<IoAnalytics />} />
-            <ButtonSide label="Logout" route="/logout" icon={<IoMdLogOut />} />
+            <ButtonSide 
+              label="Logout" 
+              route="/logout" 
+              icon={<IoMdLogOut />} 
+              isLogout={true} 
+            />
           </div>
         </div>
       </div>

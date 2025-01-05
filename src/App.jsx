@@ -7,6 +7,7 @@ import SignIn from "./components/Auth/SignIn";
 import Home from "./components/Home";
 import Create from "./components/Create";
 import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 const App = () => {
@@ -20,12 +21,36 @@ const App = () => {
       <Routes>
 
         <Route path="/" element={<Home />} />
-        <Route path="/create" element={<Create />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/qr-code" element={<QrCode />} />
-        <Route path="/link-page" element={<LinkPage />} />
-        <Route path="/analytics" element={<Analytics />} />
+
+
+        <Route path='/create' element={
+          <ProtectedRoute>
+            <Create />
+          </ProtectedRoute>}
+        />
+        <Route path='/create' element={
+          <ProtectedRoute>
+            <Create />
+          </ProtectedRoute>}
+        />
+        <Route path='/qr-code' element={
+          <ProtectedRoute>
+            <QrCode />
+          </ProtectedRoute>}
+        />
+        <Route path='/link-page' element={
+          <ProtectedRoute>
+            <LinkPage />
+          </ProtectedRoute>}
+        />
+        <Route path='/analytics' element={
+          <ProtectedRoute>
+            <Analytics />
+          </ProtectedRoute>}
+        />
+      
       </Routes>
     </BrowserRouter>
   );
