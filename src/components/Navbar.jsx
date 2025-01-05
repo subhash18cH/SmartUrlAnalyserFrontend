@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className='bg-white shadow-lg fixed w-full  '>
+      <nav  className='bg-white shadow-lg fixed w-full  '>
         <div className='flex justify-between items-center p-4'>
 
           <div className='flex justify-center items-center'>
