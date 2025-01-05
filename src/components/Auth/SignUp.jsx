@@ -34,11 +34,10 @@ const SignUp = () => {
 
     try {
       setLoading(true);
-      const response = await api.post("/auth/public/signup", sendData);
+      const response = await api.post("/api/auth/public/signup", sendData);
       reset();
       if (response.status === 200) {
         toast.success("Reagister Successful");
-
         navigate("/signin");
       }
     } catch (error) {

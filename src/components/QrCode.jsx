@@ -1,63 +1,101 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import Sidebar from './Sidebar';
+import toast from 'react-hot-toast';
+import api from './Api';
+
 const QrCode = () => {
+  const [longURL, setLongURL] = useState('');
+  const [shortURL, setShortURL] = useState('');
+  const [showQR, setShowQR] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [longURL, setLongURL] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [qrCode, setQrCode] = useState()
-
-  const handleClick = () => {
-
-  }
+  const handleGenerate = async () => {
+    if (!longURL) {
+      toast.error('Please enter a URL!');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const response = await api.post('/api/url/shortUrl', null, {
+        params: {
+          LongUrl: longURL,
+        },
+      });
+      if (response.status === 200) {
+        toast.success("Qr code generated successfully!")
+        setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
+        setShowQR(true);
+      } else {
+        toast.error('Failed to generate short URL');
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Something went wrong!');
+      console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
       <Sidebar />
-      <div className='flex justify-center'>
-        <div className=' w-[70%] p-8 ml-60 mt-12'>
-          <h1 className='text-3xl font-bold mb-10'>Create a Smart Code</h1>
-          <div className=''>
-            <div className="mb-6">
-              <label className="block mb-3 font-semibold text-gray-700">
-                Enter your URL <span className="text-red-500">*</span>
-              </label>
-              <input
-                className="px-4 py-3 border rounded-lg w-[50%] outline-none transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                type="url"
-                required
-                placeholder="Enter your long URL here"
-                value={longURL}
-                onChange={(e) => setLongURL(e.target.value)}
-              />
+      <div className="flex justify-center">
+        <div className="w-[90%] p-8 ml-60 mt-12">
+          <h1 className="text-slate-800 text-3xl sm:text-4xl font-semibold mb-12">
+            Create a Smart Code
+          </h1>
+
+          <div className="flex gap-1">
+            <div className="flex-1">
+              <div className="mb-6">
+                <label className="block mb-3 font-semibold text-gray-700">
+                  Enter your URL <span className="text-red-500">*</span>
+                </label>
+                <input
+                  className="px-4 py-3 border rounded-lg w-full outline-none transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  type="url"
+                  required
+                  placeholder="Enter your long URL here"
+                  value={longURL}
+                  onChange={(e) => setLongURL(e.target.value)}
+                />
+              </div>
+
+              <div className="mt-8">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  onClick={handleGenerate}
+                  className={`relative px-12 py-3 rounded-lg font-semibold ${isLoading
+                    ? 'bg-blue-400 cursor-wait'
+                    : 'bg-blue-600 hover:bg-blue-500'
+                    } text-white`}
+                >
+                  {isLoading ? 'Generating...' : 'Generate QR Code'}
+                </button>
+              </div>
+            </div>
+
+            <div className="flex-1 flex justify-center">
+              <div className={`transform -translate-y-12 transition-all duration-300 ${showQR ? 'opacity-100' : 'opacity-0'}`}>
+                {showQR && (
+                  <div className="p-3 bg-white rounded-lg shadow-sm">
+                    <QRCodeSVG
+                      value={shortURL}
+                      size={200}
+                      level="H"
+                      className="rounded-sm"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <div className="flex items-center mt-8">
-            <button
-              type="submit"
-              disabled={isLoading}
-              onClick={handleClick}
-              className={`relative px-12 py-3 rounded-lg font-semibold ${isLoading ? 'bg-blue-400 cursor-wait' : 'bg-blue-600 hover:bg-blue-500'
-                } text-white`}
-            >
-              {isLoading ? 'Generating...' : 'Generate'}
-            </button>
-          </div>
-          <div className='w-52 h-44 flex justify-center ml-96'>
-            {/* <QrCode
-                 title="title"
-                 value="value"
-                 bgColor="background-color"
-                 fgcolor="foreground-color"
-                 level="level"
-                 size={256}/> */}
-          </div>
         </div>
-
-
-
       </div>
     </>
-  )
-}
+  );
+};
 
-export default QrCode
+export default QrCode;

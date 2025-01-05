@@ -15,13 +15,14 @@ const Create = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await api.post('url/shortUrl', null, {
+      const response = await api.post('/api/url/shortUrl', null, {
         params: {
           LongUrl: longURL,
         },
       });
       if (response.status === 200) {
-        setShortURL(`${import.meta.env.VITE_BACK_URL}/` + response.data);
+        console.log(response)
+        setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
         setIsSuccess(true);
         toast.success('URL shortened successfully!');
         setTimeout(() => setIsSuccess(false), 2000);
@@ -48,7 +49,7 @@ const Create = () => {
 
         <div className="flex justify-center">
           <div className=" w-[70%] rounded-lg flex flex-col p-8 ml-80 mt-12">
-            <h1 className="text-3xl font-bold mb-10 text-gray-800">Create a link</h1>
+            <h1 className='text-slate-800 text-3xl sm:text-4xl font-semibold mb-12'>Create a link</h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
                 <label className="block mb-3 font-semibold text-gray-700">

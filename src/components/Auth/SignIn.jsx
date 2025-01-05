@@ -24,19 +24,15 @@ const SignIn = () => {
   const onLoginHandler = async (data) => {
     try {
       setLoading(true);
-      const response = await api.post("/auth/public/signin", data);
+      const response = await api.post("/api/auth/public/signin", data);
       if (response.status === 200 && response.data.jwtToken) {
         reset();
         toast.success("Login Successful");
         localStorage.setItem("JWT", response.data.jwtToken)
         navigate("/create")
-
-      }
-      else {
-        toast.error("something went wrong!")
       }
     } catch (error) {
-      console.log(error)
+      toast.error("something went wrong!")
     } finally {
       setLoading(false);
     }
@@ -113,8 +109,6 @@ const SignIn = () => {
               SignUp
             </Link>
           </p>
-
-
         </form>
       </div>
     </div>
