@@ -15,6 +15,12 @@ const QrCode = () => {
       toast.error('Please enter a URL!');
       return;
     }
+    try {
+      new URL(longURL);
+    } catch (e) {
+      toast.error('Please enter a valid URL!');
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await api.post('/api/url/shortUrl', null, {
@@ -22,7 +28,9 @@ const QrCode = () => {
           LongUrl: longURL,
         },
       });
+
       if (response.status === 200) {
+        console.log(response)
         toast.success("Qr code generated successfully!")
         setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
         setShowQR(true);
@@ -30,7 +38,7 @@ const QrCode = () => {
         toast.error('Failed to generate short URL');
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Something went wrong!');
+      toast.error('Something went wrong!');
       console.error('Error:', error);
     } finally {
       setIsLoading(false);

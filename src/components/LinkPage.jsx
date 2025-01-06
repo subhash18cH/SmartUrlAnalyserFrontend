@@ -20,7 +20,7 @@ const LinkPage = () => {
         setUrls(response.data);
       }
     } catch (error) {
-      toast.error("Error fetching data!")
+
     } finally {
       setLoading(false)
     }

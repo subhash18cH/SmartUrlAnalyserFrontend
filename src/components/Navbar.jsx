@@ -3,14 +3,10 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logo from '/src/assets/SmartUrlLogo.jpg'
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
-
   return (
     <>
-      <nav  className='bg-white shadow-lg fixed w-full  '>
-        <div className='flex justify-between items-center p-4'>
-
+      <nav className='bg-white shadow-lg fixed w-full  '>
+        <div className='flex justify-between items-center p-3'>
           <div className='flex justify-center items-center'>
             <img className='rounded-full w-24' src={logo} alt="Logo" />
             <h1 className='font-semibold text-2xl'>SmartUrl</h1>

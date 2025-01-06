@@ -6,7 +6,7 @@ const LinkBox = ({ longUrl, shortUrl }) => {
   const extractDomain = (url) => {
     try {
       const domain = new URL(url).hostname;
-    return domain.startsWith('www.') ? domain : `www.${domain}`;
+      return new URL(url).hostname.startsWith('www.') ? domain : `www.${domain}`;
     } catch (error) {
       toast.error("Invalid URL");
     }

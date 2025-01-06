@@ -5,7 +5,7 @@ import { QrCode } from 'lucide-react';
 import { IoAnalytics } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { IoMdCreate } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ButtonSide from './ButtonSide';
 import logo from '/src/assets/SmartUrlLogo.jpg'
 const Sidebar = () => {
@@ -14,7 +14,7 @@ const Sidebar = () => {
       <div className=' w-52 h-screen  fixed flex flex-col justify-between py-4'>
         <div className='flex flex-col justify-between'>
           <div className='flex justify-center items-center'>
-            <div className=''><img className='rounded-full w-24' src={logo} alt="SmartUrl" /></div>
+            <Link to={"/home"} className=''><img className='rounded-full w-24' src={logo} alt="SmartUrl" /></Link>
             <span className='text-xl font-semibold'>SmartUrl</span>
 
           </div>
