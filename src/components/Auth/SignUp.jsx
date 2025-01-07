@@ -55,6 +55,9 @@ const SignUp = () => {
           <h2 className="text-3xl font-bold text-gray-900">
             Create your account
           </h2>
+          <p className="mt-2  text-red-500">
+          Free server is being used, it will take 2 minutes to restart. Please wait after clicking on Sign Up.
+          </p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmitHandler)}>

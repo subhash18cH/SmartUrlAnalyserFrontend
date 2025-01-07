@@ -46,8 +46,8 @@ const SignIn = () => {
           <h2 className="text-3xl font-bold text-gray-900">
             Welcome back
           </h2>
-          <p className="mt-2 text-gray-600">
-            Please Enter your username and password
+          <p className="mt-2  text-red-500">
+          Free server is being used, it will take 2 minutes to restart. Please wait after clicking on Log In.
           </p>
         </div>
 
@@ -98,7 +98,6 @@ const SignIn = () => {
               {loading ? <span>Loading...</span> : "Log In"}
             </button>
           </div>
-
 
           <p className="text-center text-sm text-slate-700 mt-6">
             Don't have an account?{" "}
