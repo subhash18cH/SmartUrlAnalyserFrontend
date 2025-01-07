@@ -91,7 +91,6 @@ const Analytics = () => {
         setUrlsLoaded(true);
       }
     } catch (error) {
-      toast.error('Failed to fetch URLs');
     } finally {
       setLoading(false);
     }
@@ -133,13 +132,12 @@ const Analytics = () => {
       console.log("use2eeee---------")
     }
   }, [urlsLoaded, urls]);
-
+  const isDataAvailable = linkData.length > 0 || urls.length > 0;
   return (
     <div className="min-h-screen ">
       <Sidebar />
-      {<div className="ml-60 p-8">
+      {<div className={`ml-60 p-8 ${!isDataAvailable ? 'filter blur-sm' : ''}`}>
         <div className="grid grid-cols-12 gap-6">
-
           <Card className="col-span-6 row-span-4 p-7">
             <h3 className="font-semibold text-xl mb-5">Clicks + scans by device</h3>
             <div className="h-96 flex items-center justify-center">
@@ -208,10 +206,10 @@ const Analytics = () => {
               </ResponsiveContainer>
             </div>
           </Card>
-          
 
-          <Card className="col-span-12 p-6">
-            <h3 className="font-semibold text-lg mb-4">Activity Feed</h3>
+
+          <Card className={`col-span-12 p-6 blur-sm`}>
+            <h3 className="font-semibold text-lg mb-4">i will do later</h3>
             <div className="h-96">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
@@ -237,7 +235,7 @@ const Analytics = () => {
             </div>
           </Card>
 
-          <Card className="col-span-12 p-6">
+          <Card className={`col-span-12 p-6 filter blur-sm`}>
             <h3 className="font-semibold text-lg mb-4">Detailed Analytics</h3>
             <div className="h-32 bg-gray-50 rounded-lg" />
           </Card>
