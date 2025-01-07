@@ -41,15 +41,6 @@ const Analytics = () => {
   const [urlsLoaded, setUrlsLoaded] = useState(false);
   const [linkData, setLinkData] = useState([])
 
-  const lineData = [
-    { name: 'Jan', value: 20 },
-    { name: 'Feb', value: 300 },
-    { name: 'Mar', value: 600 },
-    { name: 'Apr', value: 800 },
-    { name: 'May', value: 500 },
-    { name: 'Jun', value: 700 },
-  ];
-
 
   const processDeviceData = () => {
     if (!linkData.length) return [];
@@ -65,6 +56,31 @@ const Analytics = () => {
   };
   const data = processDeviceData();
 
+  const processClickData = () => {
+    if (!linkData.length) return [];
+    const clicksByDate = {};
+    linkData.forEach(item => {
+      const date = item.accessTime.split('T')[0];
+      if (!clicksByDate[date]) {
+        clicksByDate[date] = {
+          date: date,
+          clicks: 0
+        };
+      }
+      clicksByDate[date].clicks += item.clickCount;
+    });
+    const sortedData = Object.values(clicksByDate).sort((a, b) =>
+      new Date(a.date) - new Date(b.date)
+    );
+    return sortedData.map(item => ({
+      name: new Date(item.date).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric'
+      }),
+      clicks: item.clicks
+    }));
+  };
+  const lineChartData = processClickData();
   const getUserUrls = async () => {
     setLoading(true);
     try {
@@ -158,11 +174,11 @@ const Analytics = () => {
           </Card>
 
           <Card className="col-span-6 row-span-4 p-6">
-            <h3 className="font-semibold text-lg mb-4">Quick Stats</h3>
+            <h3 className="font-semibold text-lg mb-4">Clicks + scans Over Time</h3>
             <div className="h-96">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
-                  data={lineData}
+                  data={lineChartData}
                   margin={{
                     top: 5,
                     right: 30,
@@ -171,15 +187,28 @@ const Analytics = () => {
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
+                  <XAxis
+                    dataKey="name"
+                    angle={-45}
+                    textAnchor="end"
+                    height={60}
+                  />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" dataKey="value" stroke="#8884d8" strokeWidth={2} />
+                  <Line
+                    type="monotone"
+                    dataKey="clicks"
+                    name="Clicks + scans"
+                    stroke="#8884d8"
+                    strokeWidth={2}
+                    dot={{ r: 4 }}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </Card>
+          
 
           <Card className="col-span-12 p-6">
             <h3 className="font-semibold text-lg mb-4">Activity Feed</h3>
