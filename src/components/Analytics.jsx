@@ -41,7 +41,6 @@ const Analytics = () => {
   const [urlsLoaded, setUrlsLoaded] = useState(false);
   const [linkData, setLinkData] = useState([])
 
-
   const processDeviceData = () => {
     if (!linkData.length) return [];
     const deviceMap = linkData.reduce((acc, item) => {
@@ -86,7 +85,6 @@ const Analytics = () => {
     try {
       const response = await api.get("/api/url/user");
       if (response.status === 200) {
-        console.log("r1-----", response.data)
         setUrls(response.data);
         setUrlsLoaded(true);
       }
@@ -101,7 +99,6 @@ const Analytics = () => {
     setLoading(true);
     try {
       const shortUrl = urls[0].shortUrl;
-      console.log("sss--" + shortUrl)
       const response = await api.get('/api/url/info', {
         params: {
           shortUrl: shortUrl,
@@ -109,7 +106,6 @@ const Analytics = () => {
       });
       if (response.status === 200) {
         setLinkData(response.data)
-        console.log("res2-------", response.data);
       }
     } catch (err) {
       toast.error('Failed to shorten URL');
@@ -127,9 +123,6 @@ const Analytics = () => {
     const token = localStorage.getItem("JWT")
     if (token && urlsLoaded && urls.length > 0) {
       getUrlsInfo();
-    }
-    else {
-      console.log("use2eeee---------")
     }
   }, [urlsLoaded, urls]);
   const isDataAvailable = linkData.length > 0 || urls.length > 0;

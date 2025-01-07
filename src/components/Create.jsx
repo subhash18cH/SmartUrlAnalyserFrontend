@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import api from './Api';
@@ -21,7 +20,6 @@ const Create = () => {
         },
       });
       if (response.status === 200) {
-        console.log(response)
         setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
         localStorage.setItem("shortUrl", response.data)
         setIsSuccess(true);

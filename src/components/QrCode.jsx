@@ -30,7 +30,7 @@ const QrCode = () => {
       });
 
       if (response.status === 200) {
-        console.log(response)
+     
         toast.success("Qr code generated successfully!")
         setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
         setShowQR(true);
@@ -39,7 +39,7 @@ const QrCode = () => {
       }
     } catch (error) {
       toast.error('Something went wrong!');
-      console.error('Error:', error);
+    
     } finally {
       setIsLoading(false);
     }

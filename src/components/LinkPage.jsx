@@ -15,7 +15,6 @@ const LinkPage = () => {
     setLoading(true)
     try {
       const response = await api.get("/api/url/user");
-      console.log(response)
       if (response.status === 200) {
         setUrls(response.data);
       }

@@ -8,7 +8,6 @@ const ButtonSide = ({ route, label, icon, isLogout }) => {
     if (isLogout) {
       e.preventDefault();
       localStorage.removeItem("JWT");
-      localStorage.removeItem("shortUrl");
       navigate("/");
     }
   };
