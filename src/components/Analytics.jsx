@@ -1,14 +1,9 @@
 import { Card } from '@mui/material';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useEffect, useState } from 'react';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, Legend, Tooltip, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import Sidebar from './Sidebar';
-
-const data = [
-  { name: 'Desktop', value: 400 },
-  { name: 'Tablet', value: 300 },
-  { name: 'Mobile', value: 600 },
-  { name: 'Unknown', value: 800 },
-];
+import api from './Api';
+import toast from 'react-hot-toast';
 
 const barData = [
   {
@@ -37,44 +32,127 @@ const barData = [
   },
 ];
 
-const lineData = [
-  { name: 'Jan', value: 400 },
-  { name: 'Feb', value: 300 },
-  { name: 'Mar', value: 600 },
-  { name: 'Apr', value: 800 },
-  { name: 'May', value: 500 },
-  { name: 'Jun', value: 700 },
-];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const Analytics = () => {
+  const [loading, setLoading] = useState(false);
+  const [urls, setUrls] = useState([]);
+  const [urlsLoaded, setUrlsLoaded] = useState(false);
+  const [linkData, setLinkData] = useState([])
+
+  const lineData = [
+    { name: 'Jan', value: 20 },
+    { name: 'Feb', value: 300 },
+    { name: 'Mar', value: 600 },
+    { name: 'Apr', value: 800 },
+    { name: 'May', value: 500 },
+    { name: 'Jun', value: 700 },
+  ];
+
+
+  const processDeviceData = () => {
+    if (!linkData.length) return [];
+    const deviceMap = linkData.reduce((acc, item) => {
+      const deviceType = item.deviceType || 'Unknown';
+      acc[deviceType] = (acc[deviceType] || 0) + item.clickCount;
+      return acc;
+    }, {});
+    return Object.entries(deviceMap).map(([name, value]) => ({
+      name,
+      value
+    }));
+  };
+  const data = processDeviceData();
+
+  const getUserUrls = async () => {
+    setLoading(true);
+    try {
+      const response = await api.get("/api/url/user");
+      if (response.status === 200) {
+        console.log("r1-----", response.data)
+        setUrls(response.data);
+        setUrlsLoaded(true);
+      }
+    } catch (error) {
+      toast.error('Failed to fetch URLs');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getUrlsInfo = async () => {
+    if (!urls.length) return;
+    setLoading(true);
+    try {
+      const shortUrl = urls[0].shortUrl;
+      console.log("sss--" + shortUrl)
+      const response = await api.get('/api/url/info', {
+        params: {
+          shortUrl: shortUrl,
+        }
+      });
+      if (response.status === 200) {
+        setLinkData(response.data)
+        console.log("res2-------", response.data);
+      }
+    } catch (err) {
+      toast.error('Failed to shorten URL');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getUserUrls();
+
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("JWT")
+    if (token && urlsLoaded && urls.length > 0) {
+      getUrlsInfo();
+    }
+    else {
+      console.log("use2eeee---------")
+    }
+  }, [urlsLoaded, urls]);
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen ">
       <Sidebar />
-      <div className="ml-60 p-8">
+      {<div className="ml-60 p-8">
         <div className="grid grid-cols-12 gap-6">
 
           <Card className="col-span-6 row-span-4 p-7">
-            <h3 className="font-semibold text-xl mb-4">Clicks + scans by device</h3>
-            <div className="h-96">
-              <PieChart width={800} height={400}>
+            <h3 className="font-semibold text-xl mb-5">Clicks + scans by device</h3>
+            <div className="h-96 flex items-center justify-center">
+              <PieChart width={400} height={380}>
                 <Pie
-                  className=''
                   data={data}
-                  cx="25%"
+                  cx="50%"
                   cy="50%"
                   labelLine={false}
-                  outerRadius={160}
+                  outerRadius={140}
                   fill="#8884d8"
                   dataKey="value"
                 >
                   {data.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />
-                <Legend />
+                <Legend
+                  layout="horizontal"
+                  verticalAlign="bottom"
+                  align="center"
+                  wrapperStyle={{
+                    paddingTop: "20px"
+                  }}
+                />
               </PieChart>
             </div>
           </Card>
@@ -135,7 +213,7 @@ const Analytics = () => {
             <div className="h-32 bg-gray-50 rounded-lg" />
           </Card>
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

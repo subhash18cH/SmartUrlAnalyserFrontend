@@ -23,6 +23,7 @@ const Create = () => {
       if (response.status === 200) {
         console.log(response)
         setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
+        localStorage.setItem("shortUrl", response.data)
         setIsSuccess(true);
         toast.success('URL shortened successfully!');
         setTimeout(() => setIsSuccess(false), 2000);
@@ -44,7 +45,7 @@ const Create = () => {
 
   return (
     <>
-      <div>
+      <div className=' h-[100vh]'>
         <Sidebar />
 
         <div className="flex justify-center">

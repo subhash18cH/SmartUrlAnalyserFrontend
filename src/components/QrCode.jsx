@@ -46,7 +46,7 @@ const QrCode = () => {
   };
 
   return (
-    <>
+    <div className=' h-[100vh]'>
       <Sidebar />
       <div className="flex justify-center">
         <div className="w-[90%] p-8 ml-60 mt-12">
@@ -102,7 +102,7 @@ const QrCode = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

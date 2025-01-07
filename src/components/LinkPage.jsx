@@ -14,7 +14,7 @@ const LinkPage = () => {
   const getAllURLS = async () => {
     setLoading(true)
     try {
-      const response = await api.get("/api/url/getAllUrls");
+      const response = await api.get("/api/url/user");
       console.log(response)
       if (response.status === 200) {
         setUrls(response.data);
@@ -31,7 +31,7 @@ const LinkPage = () => {
   }, [])
 
   return (
-    <>
+    <div className='h-[100vh]'>
       <Sidebar />
       <div className='flex justify-center'>
         <div className=' w-[70%] p-8 ml-60 mt-12'>
@@ -84,7 +84,7 @@ const LinkPage = () => {
 
 
 
-    </>
+    </div>
   )
 }
 
