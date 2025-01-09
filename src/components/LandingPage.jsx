@@ -17,7 +17,6 @@ const LandingPage = () => {
     <>
       <Navbar />
       <div className="min-h-screen">
-        {/* Hero Section */}
         <section className="pt-16 sm:pt-20 lg:pt-24 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
