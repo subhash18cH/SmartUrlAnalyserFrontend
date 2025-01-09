@@ -107,8 +107,7 @@ const Analytics = () => {
       <Sidebar />
       <div className={`sm:ml-52 p-4 sm:p-6 md:p-8 ${!isDataAvailable ? 'filter blur-sm' : ''}`}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
-          {/* Device Analytics Card */}
-          <Card className="lg:col-span-6 p-4 sm:p-6 md:p-7">
+          <Card className="lg:col-span-6 p-4 sm:p-6 md:p-7 mt-12">
             <h3 className="font-semibold text-lg sm:text-xl mb-4 sm:mb-5">
               Clicks + scans by device
             </h3>
@@ -150,7 +149,7 @@ const Analytics = () => {
           </Card>
 
           {/* Time Analytics Card */}
-          <Card className="lg:col-span-6 p-4 sm:p-6">
+          <Card className="lg:col-span-6 p-4 sm:p-6 mt-12">
             <h3 className="font-semibold text-lg sm:text-xl mb-4">
               Clicks + scans Over Time
             </h3>
@@ -190,7 +189,7 @@ const Analytics = () => {
           </Card>
 
           {/* Bar Chart Card */}
-          <Card className="lg:col-span-12 p-4 sm:p-6 blur-sm">
+          <Card className="lg:col-span-12 p-4 sm:p-6 blur-sm mt-12">
             <h3 className="font-semibold text-lg sm:text-xl mb-4">
               I will do later
             </h3>
@@ -206,9 +205,9 @@ const Analytics = () => {
                   }}
                   barSize={60}
                 >
-                  <XAxis 
-                    dataKey="name" 
-                    scale="point" 
+                  <XAxis
+                    dataKey="name"
+                    scale="point"
                     padding={{ left: 10, right: 10 }}
                     tick={{ fontSize: 12 }}
                   />
@@ -223,7 +222,7 @@ const Analytics = () => {
           </Card>
 
           {/* Detailed Analytics Card */}
-          <Card className="lg:col-span-12 p-4 sm:p-6 filter blur-sm">
+          <Card className="lg:col-span-12 p-4 sm:p-6 filter blur-sm mt-12">
             <h3 className="font-semibold text-lg sm:text-xl mb-4">
               Detailed Analytics
             </h3>
