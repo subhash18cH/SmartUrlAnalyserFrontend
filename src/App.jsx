@@ -9,6 +9,7 @@ import Create from "./components/Create";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./components/LandingPage";
+import UserQrCodes from "./components/UserQrCodes";
 
 
 const App = () => {
@@ -36,16 +37,24 @@ const App = () => {
             <Home />
           </ProtectedRoute>}
         />
-        <Route path='/create' element={
+        <Route path='/link-page/create' element={
           <ProtectedRoute>
             <Create />
           </ProtectedRoute>}
         />
-        <Route path='/qr-code' element={
+
+        <Route path='/qr-code/create' element={
           <ProtectedRoute>
             <QrCode />
           </ProtectedRoute>}
         />
+
+        <Route path='/qr-code' element={
+          <ProtectedRoute>
+            <UserQrCodes />
+          </ProtectedRoute>}
+        />
+
         <Route path='/link-page' element={
           <ProtectedRoute>
             <LinkPage />

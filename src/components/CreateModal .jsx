@@ -11,28 +11,30 @@ const CreateModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 w-80">
-        
+
         <div className="space-y-4">
           <button
             onClick={() => {
               onClose();
-              navigate('/create');
+              navigate('/link-page/create');
             }}
-            className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600 font-semibold"
+            className="w-full flex items-center pl-16 gap-2 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-semibold"
           >
-            <FiLink />
+            <FiLink className='text-xl' />
             Create Link
           </button>
+
           <button
             onClick={() => {
               onClose();
-              navigate('/qr-code');
+              navigate('/qr-code/create');
             }}
-            className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-green-500 text-white hover:bg-green-600 font-semibold"
+            className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-semibold"
           >
             <QrCode />
             Create QR Code
           </button>
+
         </div>
 
         <button

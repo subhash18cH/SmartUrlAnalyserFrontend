@@ -16,13 +16,15 @@ const Home = () => {
       <div className="bg-gray-50 min-h-screen">
         <Sidebar />
         <div className="flex justify-center">
+
           <div className="w-full sm:w-[90%] lg:w-[80%] rounded-lg flex flex-col p-4 sm:p-6 
-            ml-0 sm:ml-16 md:ml-52 mt-16 sm:mt-14">
-          
+            ml-0 sm:ml-16 md:ml-52 mt-16 sm:mt-2">
+            <h1 className='text-4xl font-semibold mb-8'>Your Activity</h1>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
-              
+
               <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 transition-all duration-300 hover:shadow-md">
-                
+
                 <div className="flex items-center justify-between">
                   <h3 className="text-base sm:text-lg font-semibold text-gray-800">Total Links</h3>
                   <Link className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />

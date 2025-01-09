@@ -22,7 +22,6 @@ const LinkPage = () => {
       setLoading(false)
     }
   }
-
   useEffect(() => {
     getAllURLS()
   }, [])
@@ -30,16 +29,15 @@ const LinkPage = () => {
   return (
     <div className='min-h-screen bg-gray-50'>
       <Sidebar />
-      {/* Main content area with responsive padding and width */}
       <div className='flex justify-center'>
         <div className='w-full px-4 sm:px-6 md:px-8 sm:ml-52 mt-16 sm:mt-12 max-w-7xl mx-auto'>
           <div className="w-full">
             {!loading && urls && urls.length > 0 && (
-              <h1 className='text-slate-800 text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-12 px-2'>
+              <h1 className='text-slate-800 text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-12 px-2 lg:ml-11 md:ml-7'>
                 SmartUrl Links
               </h1>
             )}
-            
+
             {loading ? (
               <div className='flex flex-col justify-center items-center h-72'>
                 <span>Please wait...</span>
@@ -56,9 +54,9 @@ const LinkPage = () => {
                         Start by clicking on Create URL button
                       </p>
                     </div>
-                    
+
                     <div className='flex justify-center w-full'>
-                      <Link to="/create">
+                      <Link to="/link-page/create">
                         <button className='flex items-center px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg 
                           hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200'>
                           <FiFilePlus className='mr-2' size={20} />
