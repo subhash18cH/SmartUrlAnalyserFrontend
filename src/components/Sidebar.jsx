@@ -5,14 +5,26 @@ import { QrCode } from 'lucide-react';
 import { IoAnalytics } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { IoMdCreate } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ButtonSide from './ButtonSide';
 import logo from '/src/assets/logo.jpg';
 import CreateModal from './CreateModal ';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navigate = useNavigate()
+  const handleClickOpen = () => {
+    localStorage.removeItem("JWT");
+    navigate("/");
+  };
 
   return (
     <>
@@ -43,7 +55,7 @@ const Sidebar = () => {
             <Link to="/home" className=''>
               <img className='rounded-full w-12 sm:w-12' src={logo} alt="SmartUrl" />
             </Link>
-            <span className='text-lg sm:text-xl font-semibold'>SmartUrl</span>
+            <span className='text-lg sm:text-xl font-semibold text-[#5052ce]'>SmartUrl</span>
           </div>
 
           <div className='flex flex-col space-y-4 sm:space-y-6 justify-center items-center mt-6'>
@@ -52,10 +64,10 @@ const Sidebar = () => {
                 setIsModalOpen(true);
                 setIsMobileMenuOpen(false);
               }}
-              className="flex items-center space-x-3 sm:space-x-5 px-4 sm:px-5 py-2 rounded-lg hover:bg-gray-100 w-full font-semibold text-sm sm:text-base"
+              className="flex items-center space-x-3 sm:space-x-5 px-6 sm:px-5 py-2 rounded-lg hover:bg-gray-100 w-full font-semibold text-sm sm:text-base"
             >
-              <IoMdCreate className='text-2xl sm:text-2xl' />
-              <span className=''>Create</span>
+              <IoMdCreate className='text-2xl sm:text-2xl ' />
+              <span className='font-semibold'>Create</span>
             </button>
 
             <ButtonSide
@@ -76,14 +88,21 @@ const Sidebar = () => {
               icon={<IoAnalytics />}
               onClick={() => setIsMobileMenuOpen(false)}
             />
-            <ButtonSide
+            {/* <ButtonSide
               label="Logout"
               route="/logout"
               icon={<IoMdLogOut />}
               isLogout={true}
               onClick={() => setIsMobileMenuOpen(false)}
-            />
+            /> */}
+            <button onClick={handleClickOpen} className='flex items-center font-semibold  hover:bg-red-600 hover:text-white w-full py-2 px-5 space-x-5 rounded-md'>
+              <span className='text-2xl'><IoMdLogOut /></span>
+              <span className='font-semibold'>Logout</span>
+
+            </button>
+
           </div>
+
         </div>
       </div>
 

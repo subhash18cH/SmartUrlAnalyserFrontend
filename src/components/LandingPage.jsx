@@ -16,7 +16,7 @@ const LandingPage = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen">
+      <div className="min-h-screen ">
         <section className="pt-16 sm:pt-20 lg:pt-24 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
@@ -28,10 +28,9 @@ const LandingPage = () => {
               </p>
               <Link
                 to="/signup"
-                className="bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-500 transition-colors inline-flex items-center group"
+                className="bg-[#5052ce] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-[#6a6bd5] transition-colors inline-flex items-center group"
               >
-                Start for Free
-                <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                Start for Free               
               </Link>
             </div>
           </div>
@@ -113,10 +112,10 @@ const LandingPage = () => {
             </p>
             <Link
               to="/signup"
-              className="bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-500 transition-colors inline-flex items-center group"
+              className="bg-[#5052ce] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-[#6a6bd5] transition-colors inline-flex items-center group"
             >
               Create Free Account
-              <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              
             </Link>
           </div>
         </section>

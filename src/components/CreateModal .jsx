@@ -18,7 +18,7 @@ const CreateModal = ({ isOpen, onClose }) => {
               onClose();
               navigate('/link-page/create');
             }}
-            className="w-full flex items-center pl-16 gap-2 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-semibold"
+            className="w-full flex items-center pl-16 gap-2 p-3 rounded-lg bg-[#5052ce] text-white hover:bg-[#6a6bd5] font-semibold"
           >
             <FiLink className='text-xl' />
             Create Link
@@ -29,7 +29,7 @@ const CreateModal = ({ isOpen, onClose }) => {
               onClose();
               navigate('/qr-code/create');
             }}
-            className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-semibold"
+            className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-[#5052ce] text-white hover:bg-[#6a6bd5] font-semibold"
           >
             <QrCode />
             Create QR Code
@@ -39,7 +39,7 @@ const CreateModal = ({ isOpen, onClose }) => {
 
         <button
           onClick={onClose}
-          className="mt-4 w-full p-2 border border-gray-300 rounded-lg hover:bg-gray-100"
+          className="mt-4 w-full p-2 border font-semibold border-gray-300 rounded-lg hover:bg-red-600 hover:text-white"
         >
           Cancel
         </button>

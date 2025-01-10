@@ -89,7 +89,7 @@ const Create = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${isLoading ? 'bg-blue-400 cursor-wait' : 'bg-blue-600 hover:bg-blue-500'} text-white`}
+                className={`w-full px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${isLoading ? 'bg-[#9792dd] cursor-wait' : 'bg-[#5052ce] hover:bg-[#6a6bd5]'} text-white`}
               >
                 {isLoading ? 'Generating...' : 'Generate'}
               </button>

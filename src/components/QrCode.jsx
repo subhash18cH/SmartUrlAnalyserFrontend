@@ -77,8 +77,8 @@ const QrCode = () => {
                     onClick={handleGenerate}
                     className={`relative w-full sm:w-auto px-6 sm:px-12 py-2 sm:py-3 rounded-lg 
                       font-semibold ${isLoading
-                        ? 'bg-blue-400 cursor-wait'
-                        : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
+                        ? 'bg-[#9792dd] cursor-wait'
+                        : 'bg-[#5052ce] hover:bg-[#6a6bd5] active:bg-[#5052ce]'
                       } text-white transition-colors duration-200 text-sm sm:text-base`}
                   >
                     {isLoading ? 'Generating...' : 'Generate QR Code'}
