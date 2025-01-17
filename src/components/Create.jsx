@@ -21,7 +21,6 @@ const Create = () => {
       });
       if (response.status === 200) {
         setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
-        localStorage.setItem("shortUrl", response.data);
         setIsSuccess(true);
         toast.success('URL shortened successfully!');
         setTimeout(() => setIsSuccess(false), 2000);

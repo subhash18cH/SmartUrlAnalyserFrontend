@@ -39,7 +39,7 @@ const CreateModal = ({ isOpen, onClose }) => {
 
         <button
           onClick={onClose}
-          className="mt-4 w-full p-2 border font-semibold border-gray-300 rounded-lg hover:bg-red-600 hover:text-white"
+          className="mt-4 w-full p-2 border font-semibold border-gray-300 rounded-lg bg-red-600 hover:bg-red-500 text-white"
         >
           Cancel
         </button>

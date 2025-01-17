@@ -28,6 +28,7 @@ const SignIn = () => {
       if (response.status === 200 && response.data.jwtToken) {
         reset();
         toast.success("Login Successful");
+        localStorage.setItem("USERNAME", response.data.userName)
         localStorage.setItem("JWT", response.data.jwtToken);
         navigate("/home");
       }
@@ -89,6 +90,7 @@ const SignIn = () => {
 
           <div>
             <button
+              disabled={loading}
               type="submit"
               className="w-full flex justify-center py-2 sm:py-3 px-4 border border-transparent rounded-md
               shadow-sm sm:text-base font-semibold text-white bg-[#5052ce] hover:bg-[#6a6bd5]

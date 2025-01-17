@@ -10,64 +10,68 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./components/LandingPage";
 import UserQrCodes from "./components/UserQrCodes";
-
+import { QRCodeProvider } from "./components/QrCodeContext";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
+    <QRCodeProvider>
 
-      <Routes>
-
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-
-
-        <Route path='/create' element={
-          <ProtectedRoute>
-            <Create />
-          </ProtectedRoute>}
-        />
-        <Route path='/home' element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>}
-        />
-        <Route path='/link-page/create' element={
-          <ProtectedRoute>
-            <Create />
-          </ProtectedRoute>}
+      <BrowserRouter>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
         />
 
-        <Route path='/qr-code/create' element={
-          <ProtectedRoute>
-            <QrCode />
-          </ProtectedRoute>}
-        />
+        <Routes>
 
-        <Route path='/qr-code' element={
-          <ProtectedRoute>
-            <UserQrCodes />
-          </ProtectedRoute>}
-        />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
 
-        <Route path='/link-page' element={
-          <ProtectedRoute>
-            <LinkPage />
-          </ProtectedRoute>}
-        />
-        <Route path='/analytics' element={
-          <ProtectedRoute>
-            <Analytics />
-          </ProtectedRoute>}
-        />
 
-      </Routes>
-    </BrowserRouter>
+          <Route path='/create' element={
+            <ProtectedRoute>
+              <Create />
+            </ProtectedRoute>}
+          />
+          <Route path='/home' element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>}
+          />
+          <Route path='/link-page/create' element={
+            <ProtectedRoute>
+              <Create />
+            </ProtectedRoute>}
+          />
+
+          <Route path='/qr-code/create' element={
+            <ProtectedRoute>
+              <QrCode />
+            </ProtectedRoute>}
+          />
+
+          <Route path='/qr-code' element={
+            <ProtectedRoute>
+              <UserQrCodes />
+            </ProtectedRoute>}
+          />
+
+          <Route path='/link-page' element={
+            <ProtectedRoute>
+              <LinkPage />
+            </ProtectedRoute>}
+          />
+          <Route path='/analytics' element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>}
+          />
+
+        </Routes>
+      </BrowserRouter>
+    </QRCodeProvider>
+
   );
 }
 export default App;

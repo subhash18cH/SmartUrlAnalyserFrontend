@@ -3,6 +3,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import Sidebar from './Sidebar';
 import toast from 'react-hot-toast';
 import api from './Api';
+import { Loader2 } from 'lucide-react';
 
 const QrCode = () => {
   const [longURL, setLongURL] = useState('');
@@ -21,22 +22,34 @@ const QrCode = () => {
       toast.error('Please enter a valid URL!');
       return;
     }
+
     setIsLoading(true);
     try {
-      const response = await api.post('/api/url/shortUrl', null, {
-        params: {
-          LongUrl: longURL,
-        },
+      const urlResponse = await api.post('/api/url/shortUrl', null, {
+        params: { LongUrl: longURL }
       });
 
-      if (response.status === 200) {
-        toast.success("QR code generated successfully!")
-        setShortURL(`${import.meta.env.VITE_BACK_URL}/Sm/` + response.data);
-        setShowQR(true);
+      if (urlResponse.status === 200) {
+        const newShortURL = `${import.meta.env.VITE_BACK_URL}/Sm/${urlResponse.data}`;
+        localStorage.setItem("short", newShortURL)
+        localStorage.setItem("long", longURL)
+        setShortURL(newShortURL);
+
+        const qrResponse = await api.post('/api/qrcode/generate', null, {
+          params: { url: newShortURL }
+        });
+
+        if (qrResponse.status === 200) {
+          setShowQR(true);
+          toast.success("QR code generated successfully!");
+        } else {
+          toast.error('Failed to generate QR code');
+        }
       } else {
         toast.error('Failed to generate short URL');
       }
     } catch (error) {
+      console.error('Error:', error);
       toast.error('Something went wrong!');
     } finally {
       setIsLoading(false);
@@ -48,9 +61,13 @@ const QrCode = () => {
       <Sidebar />
       <div className="flex justify-center">
         <div className="w-full max-w-6xl px-4 sm:px-6 md:px-8 sm:ml-56 mt-16 sm:mt-20">
-          <h1 className="text-slate-800 text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-12">
-            Create a Smart Code
-          </h1>
+          <div className="mb-8 sm:mb-12 space-y-2">
+            <h1 className="text-slate-800 text-2xl sm:text-3xl md:text-4xl font-semibold">
+              Create a Smart Code
+            </h1>
+
+          </div>
+
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
             <div className="w-full lg:w-1/2">
               <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
@@ -69,7 +86,6 @@ const QrCode = () => {
                     onChange={(e) => setLongURL(e.target.value)}
                   />
                 </div>
-
                 <div className="mt-6 sm:mt-8">
                   <button
                     type="submit"
@@ -81,14 +97,21 @@ const QrCode = () => {
                         : 'bg-[#5052ce] hover:bg-[#6a6bd5] active:bg-[#5052ce]'
                       } text-white transition-colors duration-200 text-sm sm:text-base`}
                   >
-                    {isLoading ? 'Generating...' : 'Generate QR Code'}
+                    {isLoading ? (
+                      <div className="flex items-center justify-center">
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Generating...
+                      </div>
+                    ) : (
+                      'Generate QR Code'
+                    )}
                   </button>
                 </div>
               </div>
             </div>
             <div className="w-full lg:w-1/2 flex justify-center items-start">
-              <div className={`transition-all duration-300 ${showQR 
-                ? 'opacity-100 transform translate-y-0' 
+              <div className={`transition-all duration-300 ${showQR
+                ? 'opacity-100 transform translate-y-0'
                 : 'opacity-0 transform -translate-y-4'}`}
               >
                 {showQR && (
@@ -99,7 +122,6 @@ const QrCode = () => {
                       level="H"
                       className="rounded-sm"
                     />
-                   
                   </div>
                 )}
               </div>
