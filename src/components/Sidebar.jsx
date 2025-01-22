@@ -9,12 +9,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import ButtonSide from './ButtonSide';
 import logo from '/src/assets/logo.jpg';
 import CreateModal from './CreateModal ';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,19 +37,18 @@ const Sidebar = () => {
       </button>
 
       <div className={`
-        w-52 h-screen fixed flex flex-col justify-between py-4 bg-white shadow-md
+        w-52 h-screen fixed flex flex-col justify-between py-4 bg-blue-50 shadow-md
         transform transition-transform duration-300 ease-in-out z-40
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
         sm:translate-x-0
       `}>
         <div className='flex flex-col justify-between'>
 
-          {/** Logo and name */}
           <div className='flex pl-3 items-center px-2 gap-2'>
             <Link to="/home" className=''>
               <img className='rounded-full w-12 sm:w-12' src={logo} alt="SmartUrl" />
             </Link>
-            <span className='text-lg sm:text-xl font-semibold text-[#5052ce]'>SmartUrl</span>
+            <span className='text-lg sm:text-2xl font-semibold text-[#5052ce]'>SmartUrl</span>
           </div>
 
           <div className='flex flex-col space-y-4 sm:space-y-6 justify-center items-center mt-6'>
@@ -64,7 +57,7 @@ const Sidebar = () => {
                 setIsModalOpen(true);
                 setIsMobileMenuOpen(false);
               }}
-              className="flex items-center space-x-3 sm:space-x-5 px-6 sm:px-5 py-2 rounded-lg hover:bg-gray-100 w-full font-semibold text-sm sm:text-base"
+              className="flex items-center space-x-3 sm:space-x-5 px-6 sm:px-5 py-2 rounded-lg hover:bg-blue-200 w-full font-semibold text-sm sm:text-base"
             >
               <IoMdCreate className='text-2xl sm:text-2xl ' />
               <span className='font-semibold'>Create</span>

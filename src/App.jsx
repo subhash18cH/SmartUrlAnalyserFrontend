@@ -10,11 +10,10 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./components/LandingPage";
 import UserQrCodes from "./components/UserQrCodes";
-import { QRCodeProvider } from "./components/QrCodeContext";
 
 const App = () => {
   return (
-    <QRCodeProvider>
+
 
       <BrowserRouter>
         <Toaster
@@ -70,7 +69,7 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
-    </QRCodeProvider>
+  
 
   );
 }

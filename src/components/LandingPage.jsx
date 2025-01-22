@@ -30,13 +30,11 @@ const LandingPage = () => {
                 to="/signup"
                 className="bg-[#5052ce] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-[#6a6bd5] transition-colors inline-flex items-center group"
               >
-                Start for Free               
+                Get Started               
               </Link>
             </div>
           </div>
         </section>
-
-        {/* Features Grid Section */}
         <section className="py-12 sm:py-16 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -58,8 +56,6 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
-
-        {/* Analytics Section */}
         <section className="py-12 sm:py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
@@ -101,7 +97,6 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="py-12 sm:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">

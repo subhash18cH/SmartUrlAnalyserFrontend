@@ -57,7 +57,7 @@ const QrCode = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-blue-50'>
       <Sidebar />
       <div className="flex justify-center">
         <div className="w-full max-w-6xl px-4 sm:px-6 md:px-8 sm:ml-56 mt-16 sm:mt-20">

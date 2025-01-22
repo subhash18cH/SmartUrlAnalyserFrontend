@@ -43,7 +43,7 @@ const Create = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Sidebar />
-      <div className="flex flex-col justify-center items-center flex-1 p-4">
+      <div className="flex flex-col justify-center items-center flex-1 p-4 bg-blue-50">
         <div className="w-full max-w-3xl rounded-lg flex flex-col p-6 bg-white shadow-lg">
           <h1 className="text-slate-800 text-2xl sm:text-3xl font-semibold mb-6">Create a link</h1>
           <form onSubmit={handleSubmit}>

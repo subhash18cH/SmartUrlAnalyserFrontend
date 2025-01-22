@@ -9,7 +9,11 @@ const Navbar = () => {
         <div className='flex justify-between items-center p-3'>
           <div className='flex justify-center items-center gap-2 '>
             <img className='rounded-full lg:w-14 md:w-14 w-12' src={logo} alt="Logo" />
-            <h1 className='font-bold md:text-2xl lg:text-2xl text-xl text-[#5052ce]'>SmartUrl</h1>
+            <h1 className='font-bold md:text-2xl lg:text-2xl text-xl text-[#5052ce]'>
+              <span className=''>Smart</span>
+              <span>Url</span>
+
+            </h1>
           </div>
 
           <div className='lg:space-x-8'>

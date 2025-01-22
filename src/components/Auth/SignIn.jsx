@@ -12,7 +12,7 @@ const SignIn = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+   
   } = useForm({
     defaultValues: {
       userName: "",
@@ -25,12 +25,14 @@ const SignIn = () => {
     try {
       setLoading(true);
       const response = await api.post("/api/auth/public/signin", data);
-      if (response.status === 200 && response.data.jwtToken) {
-        reset();
+      if (response.status === 200) {
         toast.success("Login Successful");
-        localStorage.setItem("USERNAME", response.data.userName)
+        reset()
         localStorage.setItem("JWT", response.data.jwtToken);
         navigate("/home");
+      }
+      else {
+        toast.error("something went wrong!")
       }
     } catch (error) {
       toast.error("something went wrong!");
@@ -40,7 +42,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg space-y-8 bg-white p-6 sm:p-8 rounded-xl shadow-lg">
         <div className="text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#5052ce]">
@@ -62,7 +64,7 @@ const SignIn = () => {
                 name="userName"
                 type="text"
                 {...register("userName")}
-                errors={errors}
+                
                 required
                 className="mt-1 block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
@@ -80,7 +82,7 @@ const SignIn = () => {
                 type="password"
                 required
                 {...register("password")}
-                errors={errors}
+              
                 className="mt-1 block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
                 placeholder="********"

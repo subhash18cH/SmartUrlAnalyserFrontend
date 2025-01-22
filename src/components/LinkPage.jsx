@@ -5,7 +5,7 @@ import api from './Api'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { FiFilePlus } from 'react-icons/fi'
-
+import { Loader2 } from 'lucide-react';
 const LinkPage = () => {
   const [urls, setUrls] = useState([])
   const [loading, setLoading] = useState(false)
@@ -15,6 +15,7 @@ const LinkPage = () => {
     try {
       const response = await api.get("/api/url/user");
       if (response.status === 200) {
+        console.log("get user urls------", response.data)
         setUrls(response.data);
       }
     } catch (error) {
@@ -27,7 +28,7 @@ const LinkPage = () => {
   }, [])
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-blue-50'>
       <Sidebar />
       <div className='flex justify-center'>
         <div className='w-full px-4 sm:px-6 md:px-8 sm:ml-52 mt-16 sm:mt-12 max-w-7xl mx-auto'>
@@ -39,8 +40,8 @@ const LinkPage = () => {
             )}
 
             {loading ? (
-              <div className='flex flex-col justify-center items-center h-72'>
-                <span>Please wait...</span>
+              <div className="flex justify-center items-center h-64">
+                <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
               </div>
             ) : (
               <>
